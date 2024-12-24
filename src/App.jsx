@@ -10,6 +10,8 @@ import ForgotPassword from "./components/Pages/ForgotPassword";
 import ResetPassword from "./components/Pages/ResetPassword";
 import SettingPage from "./components/Pages/SettingPage";
 import Quizzes from "./components/Quizzes";
+import GenerateQuiz from "./components/Pages/GenrateQuiz";
+import QuizPreview from "./components/Pages/QuizePreview";
 
 const App = () => {
   return (
@@ -25,6 +27,8 @@ const App = () => {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/dashboard" element={<SettingPage />} />
         <Route path="/dashboard/quizzes" element={<Quizzes />} />
+        <Route path="/GenrateQuize" element={<GenerateQuiz />} />
+        <Route path="/QuizPreview/:id" element={<QuizPreview />} />
       </Routes>
     </>
   );
