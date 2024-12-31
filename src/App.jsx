@@ -12,6 +12,7 @@ import SettingPage from "./components/Pages/SettingPage";
 import Quizzes from "./components/Quizzes";
 import GenerateQuiz from "./components/Pages/GenrateQuiz";
 import QuizPreview from "./components/Pages/QuizePreview";
+import EditQuestion from "./components/Pages/EditPage";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/dashboard/quizzes" element={<Quizzes />} />
         <Route path="/GenrateQuize" element={<GenerateQuiz />} />
         <Route path="/QuizPreview/:id" element={<QuizPreview />} />
+        <Route path="/EditQuestion/:id" element={<EditQuestion />} />
       </Routes>
     </>
   );

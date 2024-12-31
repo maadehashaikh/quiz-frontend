@@ -95,6 +95,13 @@ const QuizPreview = () => {
             >
               Delete Question
             </button>
+
+            <button
+  className="bg-yellow-500 px-4 py-2 rounded-sm mt-2"
+  onClick={() => navigate(`/EditQuestion/${question.id}`)}
+>
+  Edit Question
+</button>
           </div>
         ))}
       </div>
