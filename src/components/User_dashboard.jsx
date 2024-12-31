@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const User_dashboard = () => {
   const userName = localStorage.getItem("name") || "User";
-  const userEmail = localStorage.getItem("email") || "user@example.com"; 
+  const userEmail = localStorage.getItem("email") || "user@example.com";
   return (
     <>
       <div className="flex items-center justify-between">
@@ -10,13 +10,13 @@ const User_dashboard = () => {
           <i class="fa-solid fa-user text-red-500 text-2xl"></i>
           <div className="ml-3">
             <h1 className="text-xl">{userName}</h1>
-            <p className="text-sm text-gray-400">{ userEmail }</p>
+            <p className="text-sm text-gray-400">{userEmail}</p>
           </div>
         </div>
         <div>
           <button
             className="bg-red-500 text-white rounded-sm px-5 py-1 mr-12"
-            onClick={submitData}
+            // onClick={submitData}
           >
             Edit
           </button>
@@ -32,7 +32,7 @@ const User_dashboard = () => {
               <input
                 name="name"
                 value={name}
-                onChange={onChange}
+                // onChange={onChange}
                 type="text"
                 placeholder="Your First Name"
                 className="bg-red-100 pr-52 py-1 pl-2 mt-2 rounded"
@@ -44,7 +44,7 @@ const User_dashboard = () => {
               <input
                 name="lastname"
                 value={lastname}
-                onChange={onChange}
+                // onChange={onChange}
                 type="text"
                 placeholder="Your Last Name"
                 className="bg-red-100 pr-60 py-1 pl-2 mt-2 rounded"
@@ -59,7 +59,7 @@ const User_dashboard = () => {
               <select
                 name="gender"
                 value={gender}
-                onChange={onChange}
+                // onChange={onChange}
                 className="bg-red-100 pr-80 py-1 pl-2 mt-2 rounded"
               >
                 <option value="male">Male</option>
@@ -72,7 +72,7 @@ const User_dashboard = () => {
               <select
                 name="country"
                 value={country}
-                onChange={onChange}
+                // onChange={onChange}
                 className="bg-red-100 pr-80 py-1 pl-2 mt-2 rounded"
               >
                 <option value="pakistan">Pakistan</option>
@@ -89,7 +89,7 @@ const User_dashboard = () => {
               <select
                 name="language"
                 value={language}
-                onChange={onChange}
+                // onChange={onChange}
                 className="bg-red-100 pr-80 py-1 pl-2 mt-2 rounded placeholder:text-gray-400"
               >
                 <option value="english" className="placeholder:text-gray-400">
@@ -105,7 +105,7 @@ const User_dashboard = () => {
               <select
                 name="timezone"
                 value={timezone}
-                onChange={onChange}
+                // onChange={onChange}
                 className="bg-red-100 pr-80 py-1 pl-2 mt-2 rounded"
               >
                 <option value="pakistan">GMT 5:00</option>
@@ -119,7 +119,7 @@ const User_dashboard = () => {
             <h2 className="text-lg">My email Address</h2>
             <p>
               <i class="fa-solid fa-envelope text-red-500 mr-3"></i>
-              { userEmail }
+              {userEmail}
               <h3 className="text-gray-400 ml-7">1 month ago</h3>
             </p>
 

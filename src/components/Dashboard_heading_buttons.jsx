@@ -16,9 +16,3 @@ const Dashboard_heading_buttons = ({ heading, button1, button2, button3 }) => {
 };
 
 export default Dashboard_heading_buttons;
-
-// {({ isActive }) =>
-//   isActive
-//     ? "bg-white text-red-500 rounded-sm py-1 px-3 ml-8 mt-3 "
-//     : "text-white"
-// }

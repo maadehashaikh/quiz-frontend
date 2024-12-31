@@ -8,7 +8,7 @@ const Quizzes = () => {
       <div className="w-[17%] h-full bg-white">
         <Setting />
       </div>
-      <div className="w-[85%] flex flex-col ">
+      <div className="w-[85%] flex flex-col">
         <div className="h-[14%] bg-black text-white ">
           <Dashboard_heading_buttons
             heading={"Quizzes"}
