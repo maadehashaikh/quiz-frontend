@@ -8,10 +8,13 @@ import Help from "./components/Pages/Help";
 import Login from "./components/Pages/Login";
 import ForgotPassword from "./components/Pages/ForgotPassword";
 import ResetPassword from "./components/Pages/ResetPassword";
-// import SettingPage from "./components/Pages/SettingPage";
 import Quizzes from "./components/Quizzes";
 import Dashboard from "./components/Pages/Dashboard";
-import Setting from "./components/Setting";
+import User_dashboard from "./components/User_dashboard";
+import Presentation from "./components/Presentation";
+import Quiz_participation from "./components/Pages/Quiz_participation";
+import Quiz_question from "./components/Pages/Quiz_question";
+import Live_polling from "./components/Pages/Live_polling";
 
 const App = () => {
   return (
@@ -25,9 +28,13 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/dashboard" element={<Setting />} />
-        <Route path="/dashboard/quizzes" element={<Quizzes />} />
-        <Route path="/dashboard/dashboard" element={<Dashboard />} />
+        <Route path="/quizzes" element={<Quizzes />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/settings" element={<User_dashboard />} />
+        <Route path="/presentation" element={<Presentation />} />
+        <Route path="/quiz_participation" element={<Quiz_participation />} />
+        <Route path="/quiz_question" element={<Quiz_question />} />
+        <Route path="/live_polling" element={<Live_polling />} />
       </Routes>
     </>
   );

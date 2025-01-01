@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation , useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "../App.css";
 import logo from "../Images/logo.png";
 const Navbar = () => {
@@ -10,9 +10,8 @@ const Navbar = () => {
     location.pathname === "/signup" ||
     location.pathname === "/forgotPassword";
 
-    // Check if user is logged in
+  // Check if user is logged in
   const isLoggedIn = !!localStorage.getItem("access");
-
 
   // Logout function
   const handleLogout = () => {
@@ -71,21 +70,33 @@ const Navbar = () => {
           Help
         </NavLink>
       </nav>
+      {/* bell and user icons */}
+      <div className="flex gap-5">
+        <div className="bg-red-600 px-2 py-1 rounded-3xl">
+          <i class="fa-solid fa-bell text-black"></i>
+        </div>
+        <NavLink to={"/dashboard"}>
+          <div className="bg-red-600 px-2 py-1 rounded-3xl">
+            <i class="fa-solid fa-user text-white"></i>
+          </div>
+        </NavLink>
+      </div>
+
       <div className="flex gap-5 mr-10">
-      {isLoggedIn ? (
+        {isLoggedIn ? (
           <>
             <i className="fa-solid fa-bell"></i>
             <i className="fa-solid fa-user"></i>
-            <button onClick={handleLogout}  className={({ isActive }) =>
-            isActive ? "text-red-600" : "text-white"
-          }>
-
+            <button
+              onClick={handleLogout}
+              className={({ isActive }) =>
+                isActive ? "text-red-600" : "text-white"
+              }
+            >
               Logout
             </button>
           </>
         ) : null}
-
-
       </div>
     </div>
   );
