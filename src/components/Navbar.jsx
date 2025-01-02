@@ -70,7 +70,13 @@ const Navbar = () => {
           Help
         </NavLink>
       </nav>
-      {/* bell and user icons */}
+     
+
+      <div className="flex gap-5 mr-10">
+        {isLoggedIn ? (
+          <>
+            
+             {/* bell and user icons */}
       <div className="flex gap-5">
         <div className="bg-red-600 px-2 py-1 rounded-3xl">
           <i class="fa-solid fa-bell text-black"></i>
@@ -81,12 +87,6 @@ const Navbar = () => {
           </div>
         </NavLink>
       </div>
-
-      <div className="flex gap-5 mr-10">
-        {isLoggedIn ? (
-          <>
-            <i className="fa-solid fa-bell"></i>
-            <i className="fa-solid fa-user"></i>
             <button
               onClick={handleLogout}
               className={({ isActive }) =>

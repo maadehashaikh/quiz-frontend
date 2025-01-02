@@ -9,12 +9,17 @@ import Login from "./components/Pages/Login";
 import ForgotPassword from "./components/Pages/ForgotPassword";
 import ResetPassword from "./components/Pages/ResetPassword";
 import Quizzes from "./components/Quizzes";
+
 import Dashboard from "./components/Pages/Dashboard";
 import User_dashboard from "./components/User_dashboard";
 import Presentation from "./components/Presentation";
 import Quiz_participation from "./components/Pages/Quiz_participation";
 import Quiz_question from "./components/Pages/Quiz_question";
 import Live_polling from "./components/Pages/Live_polling";
+import GenerateQuiz from "./components/Pages/GenrateQuiz";
+import QuizPreview from "./components/Pages/QuizePreview";
+import EditQuestion from "./components/Pages/EditPage";
+
 
 const App = () => {
   return (
@@ -35,6 +40,13 @@ const App = () => {
         <Route path="/quiz_participation" element={<Quiz_participation />} />
         <Route path="/quiz_question" element={<Quiz_question />} />
         <Route path="/live_polling" element={<Live_polling />} />
+
+       
+        
+        <Route path="/GenrateQuize" element={<GenerateQuiz />} />
+        <Route path="/QuizPreview/:id" element={<QuizPreview />} />
+        <Route path="/EditQuestion/:id" element={<EditQuestion />} />
+
       </Routes>
     </>
   );

@@ -49,11 +49,11 @@ const Setting = () => {
           </NavLink>
         </div>
         <div className="text-gray-400 flex gap-3">
-          <i class="fa-solid fa-chart-line"></i>
+          <i className="fa-solid fa-chart-line"></i>
           Analytics
         </div>
         <div className="text-gray-400 flex gap-3">
-          <i class="fa-solid fa-bell"></i>
+          <i className="fa-solid fa-bell"></i>
           Notification
         </div>
         <div className="text-gray-400 flex gap-12">

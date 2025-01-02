@@ -3,8 +3,8 @@ import Setting from "./Setting";
 import Dashboard_heading_buttons from "./Dashboard_heading_buttons";
 
 const User_dashboard = () => {
-  // const userName = localStorage.getItem("name") || "User";
-  // const userEmail = localStorage.getItem("email") || "user@example.com";
+  const userName = localStorage.getItem("name") || "User";
+  const userEmail = localStorage.getItem("email") || "user@example.com";
   return (
     <>
       <div className="flex h-screen">
@@ -26,12 +26,12 @@ const User_dashboard = () => {
                 <i class="fa-solid fa-user text-red-500 text-xl bg-red-100 px-[20px] py-[14px] rounded-3xl"></i>
                 <div className="">
                   <h1 className="text-xl">
-                    {/* {userName} */}
-                    UserName
+                    {userName}
+                    
                   </h1>
                   <p className="text-base text-gray-400">
-                    {/* {userEmail} */}
-                    useremail@gmail.com
+                    {userEmail}
+                   
                   </p>
                 </div>
               </div>
@@ -44,7 +44,7 @@ const User_dashboard = () => {
                 </button>
               </div>
             </div>
-            {/* Form div */}
+            Form div
             <div className=" mt-3">
               <form>
                 <div className="flex items-center gap-20 ml-5">
