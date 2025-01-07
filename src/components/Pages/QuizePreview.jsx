@@ -22,6 +22,7 @@ const QuizPreview = () => {
         if (response.ok) {
           const data = await response.json();
           setQuizDetails(data);
+          console.log(data)
         } else {
           console.error("Failed to fetch quiz details:", response.status);
         }
@@ -70,6 +71,7 @@ const QuizPreview = () => {
       <h2 className="text-xl">Title: {quizDetails.title}</h2>
       <h3>Course: {quizDetails.course_name}</h3>
       <h3>Subject: {quizDetails.subject}</h3>
+      <h3>QuizeCode: {quizDetails.code}</h3>
       <div className="mt-6">
         {quizDetails.questions.map((question) => (
           <div

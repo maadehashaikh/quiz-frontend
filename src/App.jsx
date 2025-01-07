@@ -38,11 +38,9 @@ const App = () => {
         <Route path="/settings" element={<User_dashboard />} />
         <Route path="/presentation" element={<Presentation />} />
         <Route path="/quiz_participation" element={<Quiz_participation />} />
-        <Route path="/quiz_question" element={<Quiz_question />} />
-        <Route path="/live_polling" element={<Live_polling />} />
-
-       
+        <Route path="/quiz/:quizId/:participantId" element={<Quiz_question />} />
         
+        <Route path="/live_polling" element={<Live_polling />} /> 
         <Route path="/GenrateQuize" element={<GenerateQuiz />} />
         <Route path="/QuizPreview/:id" element={<QuizPreview />} />
         <Route path="/EditQuestion/:id" element={<EditQuestion />} />
