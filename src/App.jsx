@@ -15,6 +15,8 @@ import Presentation from "./components/Presentation";
 import Quiz_participation from "./components/Pages/Quiz_participation";
 import Quiz_question from "./components/Pages/Quiz_question";
 import Live_polling from "./components/Pages/Live_polling";
+import Quiz_history from "./components/Pages/Quiz_history";
+import Create_New_Quiz from "./components/Pages/Create_New_Quiz";
 
 const App = () => {
   return (
@@ -35,6 +37,8 @@ const App = () => {
         <Route path="/quiz_participation" element={<Quiz_participation />} />
         <Route path="/quiz_question" element={<Quiz_question />} />
         <Route path="/live_polling" element={<Live_polling />} />
+        <Route path="/quiz_history" element={<Quiz_history />} />
+        <Route path="/create_new_quiz" element={<Create_New_Quiz />} />
       </Routes>
     </>
   );
