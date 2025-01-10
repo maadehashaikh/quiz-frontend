@@ -17,6 +17,10 @@ import Quiz_question from "./components/Pages/Quiz_question";
 import Live_polling from "./components/Pages/Live_polling";
 import Quiz_history from "./components/Pages/Quiz_history";
 import Create_New_Quiz from "./components/Pages/Create_New_Quiz";
+import Quiz_details from "./components/Pages/Quiz_details";
+import Question_Preview_Edit from "./components/Pages/Question_Preview_Edit";
+import Questions_Preview from "./components/Pages/Questions_Preview";
+import Quiz_User_History from "./components/Quiz_User_History";
 
 const App = () => {
   return (
@@ -39,6 +43,10 @@ const App = () => {
         <Route path="/live_polling" element={<Live_polling />} />
         <Route path="/quiz_history" element={<Quiz_history />} />
         <Route path="/create_new_quiz" element={<Create_New_Quiz />} />
+        <Route path="/quiz_details" element={<Quiz_details />} />
+        <Route path="/preview_Edit" element={<Question_Preview_Edit />} />
+        <Route path="/question_preview" element={<Questions_Preview />} />
+        <Route path="/quiz_user_history" element={<Quiz_User_History />} />
       </Routes>
     </>
   );

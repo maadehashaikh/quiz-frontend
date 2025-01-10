@@ -4,7 +4,7 @@ const Create_New_Quiz = () => {
   return (
     <div className="bg-red-50 w-full h-screen">
       {/* Added 'mt-12' for gap between the red background and white container */}
-      <div className="p-6 bg-white rounded-lg shadow-md w-1/2 mx-auto">
+      <div className="p-6 bg-white rounded-lg shadow-md w-1/2 absolute mt-12 ml-[25%] ">
         <h1 className="text-2xl font-bold text-gray-800 mb-4">Quiz History</h1>
         <div className="mt-6">
           <p className="text-gray-700 font-medium mb-4 text-xl">
@@ -45,6 +45,16 @@ const Create_New_Quiz = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className=" flex items-center justify-between px-4">
+          <button className="text-gray-600 flex gap-2">
+            <i class="fa-solid fa-arrow-left "></i>
+            <p className="mt-[-3px] font-medium">Back</p>
+          </button>
+          <button className="bg-red-600 px-7 py-1 rounded-md text-white">
+            Proceed
+          </button>
         </div>
       </div>
     </div>
