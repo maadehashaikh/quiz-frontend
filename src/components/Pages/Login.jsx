@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
+import { toast } from 'react-toastify';
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -35,11 +37,13 @@ const Login = () => {
         localStorage.setItem("refresh",data.refresh)
         localStorage.setItem("name", data.name); 
         localStorage.setItem("email", data.email); 
-        alert("sucess full login")
+        // alert("sucess full login")
+        toast.success("Congrats You're login successfully");
         navigate("/dashboard")
       }
       else{
-        alert("Invalid Login Credeentials.")
+        // alert("Invalid Login Credeentials.")
+        toast.error("Invalid Login Credeentials");
       }
     } catch (error) {
       console.error("Error during login:", error);

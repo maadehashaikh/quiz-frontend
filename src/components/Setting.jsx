@@ -49,8 +49,17 @@ const Setting = () => {
           </NavLink>
         </div>
         <div className="text-gray-400 flex gap-3">
-          <i className="fa-solid fa-chart-line"></i>
-          Analytics
+          <NavLink
+            to="/quiz_user_analysis"
+            className={({ isActive }) =>
+              isActive
+                ? "text-red-600 bg-red-100 pr-7 rounded-md py-1"
+                : "text-gray-400"
+            }
+          >
+           <i className="fa-solid fa-chart-line"></i>
+           Analytics
+          </NavLink>
         </div>
         <div className="text-gray-400 flex gap-3">
           <i className="fa-solid fa-bell"></i>

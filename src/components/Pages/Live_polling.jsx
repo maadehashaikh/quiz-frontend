@@ -42,7 +42,6 @@
 //             <span className="text-red-400 font-bold">12</span>
 //           </div>
 //         </div>
-
 //         {/* Sidebar */}
 //         <div className="flex-shrink-0 w-1/4 p-6 bg-gray-800">
 //           <div className="mt-28">
@@ -61,8 +60,8 @@
 //     </div>
 //   );
 // };
-
 // export default Live_polling;
+
 
 
 

@@ -9,7 +9,6 @@ import Login from "./components/Pages/Login";
 import ForgotPassword from "./components/Pages/ForgotPassword";
 import ResetPassword from "./components/Pages/ResetPassword";
 import Quizzes from "./components/Quizzes";
-
 import Dashboard from "./components/Pages/Dashboard";
 import User_dashboard from "./components/User_dashboard";
 import Presentation from "./components/Presentation";
@@ -19,11 +18,18 @@ import Live_polling from "./components/Pages/Live_polling";
 import GenerateQuiz from "./components/Pages/GenrateQuiz";
 import QuizPreview from "./components/Pages/QuizePreview";
 import EditQuestion from "./components/Pages/EditPage";
+import Quiz_User_History from "./components/Pages/QuizUserHistory";
+import QuizAnalysis from "./components/Pages/QUestion_report";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Quiz_User_Analysis from "./components/Quiz_User_analyis";
+
 
 
 const App = () => {
   return (
     <>
+    <ToastContainer />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -39,12 +45,13 @@ const App = () => {
         <Route path="/presentation" element={<Presentation />} />
         <Route path="/quiz_participation" element={<Quiz_participation />} />
         <Route path="/quiz/:quizId/:participantId" element={<Quiz_question />} />
-        
         <Route path="/live_polling" element={<Live_polling />} /> 
         <Route path="/GenrateQuize" element={<GenerateQuiz />} />
         <Route path="/QuizPreview/:id" element={<QuizPreview />} />
         <Route path="/EditQuestion/:id" element={<EditQuestion />} />
-
+        <Route path="/quiz_user_history/:id" element={<Quiz_User_History />} />
+        <Route path="/quiz_report" element={<QuizAnalysis />} />
+        <Route path="/quiz_user_analysis" element={<Quiz_User_Analysis />} />
       </Routes>
     </>
   );
