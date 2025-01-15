@@ -89,32 +89,32 @@ const Quiz_User_Analysis = () => {
           />
         </div>
 
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow rounded-lg">
+    <div className="max-w-3xl mx-auto p-6 bg-black shadow rounded-lg">
        
       {/* Header Section */}
       <div className="mb-6">
-        <h2 className="text-xl font-semibold">Quiz Analysis</h2>
-        <p className="text-gray-600">Details of all participants</p>
+        <h2 className="text-xl text-white font-semibold">Quiz Analysis</h2>
+        <p className="text-white">Details of all participants</p>
       </div>
 
       {/* Table Section */}
       <div>
-        <table className="min-w-full bg-white border border-gray-200">
+        <table className="min-w-full bg-black border border-black">
           <thead>
             <tr>
-              <th className="py-2 px-4 text-left font-medium text-gray-600">Name</th>
-              <th className="py-2 px-4 font-medium text-gray-600">Email</th>
-              <th className="py-2 px-4 font-medium text-gray-600">Total Attempts</th>
-              <th className="py-2 px-4 font-medium text-gray-600">Pass Count</th>
-              <th className="py-2 px-4 font-medium text-gray-600">Fail Count</th>
+              <th className="py-2 px-4 text-left font-medium text-white">Name</th>
+              <th className="py-2 px-4 font-medium text-white">Email</th>
+              <th className="py-2 px-4 font-medium text-white">Total Attempts</th>
+              <th className="py-2 px-4 font-medium text-white">Pass Count</th>
+              <th className="py-2 px-4 font-medium text-white">Fail Count</th>
             </tr>
           </thead>
           <tbody>
             {students.map((student, index) => (
               <tr key={index} className="border-b last:border-none">
-                <td className="py-2 px-4">{student.name}</td>
-                <td className="py-2 px-4">{student.email || "N/A"}</td>
-                <td className="py-2 px-4">{student.total_attempts}</td>
+                <td className="py-2 px-4 text-white">{student.name}</td>
+                <td className="py-2 px-4 text-white">{student.email || "N/A"}</td>
+                <td className="py-2 px-4 text-white">{student.total_attempts}</td>
                 <td className="py-2 px-4 text-green-500">{student.pass_count}</td>
                 <td className="py-2 px-4 text-red-500">{student.fail_count}</td>
               </tr>

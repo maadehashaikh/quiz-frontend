@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "../App.css";
 import logo from "../Images/logo.png";
+
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -10,93 +11,98 @@ const Navbar = () => {
     location.pathname === "/signup" ||
     location.pathname === "/forgotPassword";
 
-  // Check if user is logged in
   const isLoggedIn = !!localStorage.getItem("access");
 
-  // Logout function
   const handleLogout = () => {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
     navigate("/login");
   };
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <div
-      className=" bg-black text-white flex items-center 
-    justify-between text-center py-4"
-    >
-      <div className="text-3xl ml-12">
-        <img src={logo} alt="Logo" className="w-[120px]" />
-      </div>
-      <nav className="flex gap-12 text-lg ml-24 font-medium">
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "text-red-600" : "text-white"
-          }
-        >
-          Home
-        </NavLink>
-
-        {/* <NavLink
-          to="/login"
-          className={isAuthPage ? "text-red-600" : "text-white"}
-        >
-          Login/Sign Up
-        </NavLink> */}
-        {!isLoggedIn && (
-          <NavLink
-            to="/login"
-            className={isAuthPage ? "text-red-600" : "text-white"}
-          >
-            Login/Sign Up
-          </NavLink>
-        )}
-
-        <NavLink
-          to="/about"
-          className={({ isActive }) =>
-            isActive ? "text-red-600" : "text-white"
-          }
-        >
-          About Us
-        </NavLink>
-        <NavLink
-          to="/help"
-          className={({ isActive }) =>
-            isActive ? "text-red-600" : "text-white"
-          }
-        >
-          Help
-        </NavLink>
-      </nav>
-     
-
-      <div className="flex gap-5 mr-10">
-        {isLoggedIn ? (
-          <>
-            
-             {/* bell and user icons */}
-      <div className="flex gap-5">
-        <div className="bg-red-600 px-2 py-1 rounded-3xl">
-          <i class="fa-solid fa-bell text-black"></i>
+    <div className="bg-black text-white">
+      <div className="flex items-center justify-between px-4 py-4">
+        {/* Logo */}
+        <div>
+          <img src={logo} alt="Logo" className="w-[120px]" />
         </div>
-        <NavLink to={"/dashboard"}>
-          <div className="bg-red-600 px-2 py-1 rounded-3xl">
-            <i class="fa-solid fa-user text-white"></i>
-          </div>
-        </NavLink>
-      </div>
-            <button
-              onClick={handleLogout}
-              className={({ isActive }) =>
-                isActive ? "text-red-600" : "text-white"
-              }
+
+        {/* Toggle Button for Mobile */}
+        <div className="flex items-center gap-5">
+
+        <button
+          className="lg:hidden text-white text-2xl"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <i className="fas fa-bars"></i>
+        </button>
+        </div>
+
+        {/* Desktop Navbar */}
+        <nav
+          className={`lg:flex gap-12 text-lg font-medium ${
+            isMenuOpen ? "flex" : "hidden"
+          } lg:block`}
+        >
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "text-red-600" : "text-white"
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              isActive ? "text-red-600" : "text-white"
+            }
+          >
+            About Us
+          </NavLink>
+          <NavLink
+            to="/help"
+            className={({ isActive }) =>
+              isActive ? "text-red-600" : "text-white"
+            }
+          >
+            Help
+          </NavLink>
+          {!isLoggedIn && (
+            <NavLink
+              to="/login"
+              className={isAuthPage ? "text-red-600" : "text-white"}
             >
-              Logout
-            </button>
-          </>
-        ) : null}
+              Login/Sign Up
+            </NavLink>
+          )}
+        </nav>
+
+        {/* Right Side - Logout and Icons */}
+        <div className="flex items-center gap-5">
+          {isLoggedIn && (
+            <>
+              <div className="flex gap-5">
+                <div className="bg-red-600 px-2 py-1 rounded-3xl">
+                  <i className="fa-solid fa-bell text-black"></i>
+                </div>
+                <NavLink to={"/dashboard"}>
+                  <div className="bg-red-600 px-2 py-1 rounded-3xl">
+                    <i className="fa-solid fa-user text-white"></i>
+                  </div>
+                </NavLink>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="text-white"
+              >
+                Logout
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
