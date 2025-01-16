@@ -7,7 +7,7 @@ const Quiz_User_History = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+console.log(id)
   const fetchQuizResults = async () => {
     try {
       const token = localStorage.getItem("access");

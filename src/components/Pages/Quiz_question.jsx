@@ -1,91 +1,283 @@
-// import React from "react";
+// import React, { useState, useEffect } from "react";
+// import { useParams, useNavigate } from "react-router-dom";
+// import { ToastContainer, toast } from "react-toastify";
 
-// const Quiz_question = () => {
+
+// const QuizQuestion = () => {
+//   const { quizId, participantId } = useParams();
+//   const navigate = useNavigate();
+//   const [questions, setQuestions] = useState([]);
+//   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+//   const [responses, setResponses] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [timer, setTimer] = useState(20);
+//   const [quizFinished, setQuizFinished] = useState(false);
+
+//   // Fetch Questions
+//   useEffect(() => {
+//     const fetchQuestions = async () => {
+//       try {
+//         const response = await fetch(
+//           `http://127.0.0.1:8000/api/${quizId}/question-particepent/?participant_id=${participantId}`
+//         );
+
+//         if (response.ok) {
+//           const data = await response.json();
+//           if (data.message) {
+//             toast.error("You have already joined the quiz. Thank you!");
+//             navigate("/quiz_participation");
+//             return;
+//           } else if (!data.questions || data.questions.length === 0) {
+//             toast.error("No questions available for this quiz.");
+//             navigate("/quiz_participation");
+//             return;
+//           }
+//           setQuestions(data.questions);
+//         } else {
+//           if (response.status === 403) {
+//             toast.error("You are not authorized for this quiz.");
+//             navigate("/quiz_participation");
+//           } else {
+//             throw new Error(`Failed to fetch questions: ${response.status}`);
+//           }
+//         }
+//       } catch (err) {
+//         console.error("Error fetching questions:", err);
+//         toast.error(err.message || "Error fetching questions.");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchQuestions();
+//   }, [quizId, participantId, navigate]);
+
+//   // Timer Logic
+//   useEffect(() => {
+//     if (timer === 0) {
+//       if (currentQuestionIndex < questions.length - 1) {
+//         goToNextQuestion();
+//       } else {
+//         finishQuiz();
+//       }
+//     }
+//     const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+//     return () => clearInterval(interval);
+//   }, [timer, currentQuestionIndex, questions]);
+
+//   // Go to Next Question
+//   const goToNextQuestion = () => {
+//     setTimer(20);
+//     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+//   };
+
+//   // Finish Quiz
+//   const finishQuiz = () => {
+//     setQuizFinished(true);
+    
+//     navigate("/thank-you");
+//   };
+
+//   // Handle Option Selection
+//   const handleOptionSelect = async (questionId, option) => {
+//     const updatedResponses = [...responses];
+//     const existingResponse = updatedResponses.find(
+//       (response) => response.question_id === questionId
+//     );
+
+//     if (existingResponse) {
+//       existingResponse.select_option = option;
+//     } else {
+//       updatedResponses.push({ question_id: questionId, select_option: option });
+//     }
+
+//     setResponses(updatedResponses);
+    
+
+//     try {
+//       const token = localStorage.getItem("access");
+//           await fetch(`http://127.0.0.1:8000/api/${quizId}/live_polling/`, {
+//         method: "GET",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${token}`,
+//         },
+//         body: JSON.stringify({
+//           participant_id: participantId,
+//           question_id: questionId,
+//           selected_option: option,
+//         }),
+//       });
+//     } catch (error) {
+//       console.error("Error sending live update:", error);
+//     }
+  
+//     if (currentQuestionIndex < questions.length - 1) {
+//       goToNextQuestion();
+//     } else {
+//       finishQuiz();
+//     }
+//   };
+
+//     // Submit Responses
+//     const submitResponses = async (responses) => {
+//       try {
+//         const response = await fetch(
+//           `http://127.0.0.1:8000/api/${quizId}/submit-responce/`,
+//           {
+//             method: "POST",
+//             headers: {
+//               "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify({ participant_id: participantId, responses }),
+//           }
+//         );
+  
+//         if (response.ok) {
+//           toast.success("Quiz submitted successfully!");
+//           navigate("/thank-you");
+//         } else {
+//           throw new Error(`Failed to submit responses: ${response.status}`);
+//         }
+//       } catch (err) {
+//         console.error("Error submitting responses:", err);
+//         toast.error(err.message || "Error submitting responses.");
+//       }
+//     };
+  
+
+//   if (loading) return <div className="text-white text-center">Loading questions...</div>;
+//   if (questions.length === 0) return <div className="text-white text-center">No questions available</div>;
+
+//   const currentQuestion = questions[currentQuestionIndex];
+
 //   return (
-//     <div className="w-full h-screen bg-black">
+//     <div className="w-full h-screen bg-black text-white">
+//       <ToastContainer />
 //       <div className="pt-8">
-//         <div className="bg-gray-800 rounded-lg w-fit px-28 py-7 text-white m-auto mb-10">
-//           <h1 className="text-2xl mb-4">Question No. 1 </h1>
-//           <h2 className="text-base">Who is the Prime Minister of Pakistan?</h2>
+//         {/* Timer Display */}
+//         <div className="text-center text-3xl font-bold mb-6">Time Left: {timer}s</div>
+
+//         {/* Question Box */}
+//         <div
+//           className="w-11/12 md:w-2/3 lg:w-1/2 bg-gray-800 rounded-lg w-fit px-28 py-7 m-auto mb-10 slide-animation transition-transform duration-500 ease-in-out transform"
+//           key={currentQuestionIndex} // Key to trigger animation
+//         >
+//           <h1 className="text-2xl mb-4">Question No. {currentQuestionIndex + 1}</h1>
+//           <h2 className="text-base">{currentQuestion.text}</h2>
 //         </div>
-//         <div className="options flex px-10 flex-wrap gap-10">
-//           <p className="bg-red-500 text-white pr-[35%] py-2 rounded-lg">
-//             <i class="fa-solid fa-a text-red-500 bg-white px-2 py-2 rounded-2xl m-2"></i>
-//             Option A
-//           </p>
-//           <p className="bg-blue-500 text-white pr-[35%] py-2 rounded-lg ml-10">
-//             <i class="fa-solid fa-b text-blue-500 bg-white px-2 py-2 rounded-2xl m-2"></i>
-//             Option B
-//           </p>
-//           <p className="bg-green-400 text-white pr-[35%] py-2 rounded-lg mt-8">
-//             <i class="fa-solid fa-c text-green-400 bg-white px-2 py-2 rounded-2xl m-2"></i>
-//             Option C
-//           </p>
-//           <p className="bg-fuchsia-500 text-white pr-[35%] py-2 rounded-lg mt-8 ml-10">
-//             <i class="fa-solid fa-d text-fuchsia-500 bg-white px-2 py-2 rounded-2xl m-2"></i>
-//             Option D
-//           </p>
+
+//         {/* Options */}
+//         <div className="options flex px-10 flex-wrap gap-10 transition duration-300">
+//           {Object.entries(currentQuestion.options).map(([key, value], index) => (
+//             <button
+//               key={index}
+//               className={`option-button bg-blue-500 text-white py-3 px-6 rounded-lg transition-all ${{
+//                 0: "bg-red-500",
+//                 1: "bg-green-500",
+//                 2: "bg-blue-500",
+//                 3: "bg-purple-500",
+//               }[index]}`}
+//               onClick={() => handleOptionSelect(currentQuestion.id, key)}
+//             >
+//               {key}. {value}
+//             </button>
+//           ))}
 //         </div>
 //       </div>
+      
 //     </div>
 //   );
 // };
 
-// export default Quiz_question;
+// export default QuizQuestion;
+
+
+
+
 
 
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const QuizQuestion = () => {
-  const { quizId, participantId } = useParams(); 
+  const { quizId, participantId } = useParams();
+  const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [responses, setResponses] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [quizFinished, setQuizFinished] = useState(false); // New state
-
-  // const {quizId} = useParams();; // Replace with actual quiz ID
-  // const participantId = 11; // Replace with actual participant ID
+  const [timer, setTimer] = useState(20);
+  const [quizFinished, setQuizFinished] = useState(false);
 
   // Fetch Questions
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const token = localStorage.getItem("access");
-        if (!token) throw new Error("No token found");
-
         const response = await fetch(
-          `http://127.0.0.1:8000/api/${quizId}/question-particepent/`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          `http://127.0.0.1:8000/api/${quizId}/question-particepent/?participant_id=${participantId}`
         );
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data)
+          if (data.message) {
+            toast.error("You have already joined the quiz. Thank you!");
+            navigate("/quiz_participation");
+            return;
+          } else if (!data.questions || data.questions.length === 0) {
+            toast.error("No questions available for this quiz.");
+            navigate("/quiz_participation");
+            return;
+          }
           setQuestions(data.questions);
         } else {
-          throw new Error(`Failed to fetch questions: ${response.status}`);
+          if (response.status === 403) {
+            toast.error("You are not authorized for this quiz.");
+            navigate("/quiz_participation");
+          } else {
+            throw new Error(`Failed to fetch questions: ${response.status}`);
+          }
         }
       } catch (err) {
         console.error("Error fetching questions:", err);
-        setError(err.message);
+        toast.error(err.message || "Error fetching questions.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchQuestions();
-  }, [quizId]);
+  }, [quizId, participantId, navigate]);
 
-  // Handle Option Selection
-  const handleOptionSelect = (questionId, option) => {
+  // Timer Logic
+  useEffect(() => {
+    if (timer === 0) {
+      if (currentQuestionIndex < questions.length - 1) {
+        goToNextQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+    const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+    return () => clearInterval(interval);
+  }, [timer, currentQuestionIndex, questions]);
+
+  // Go to Next Question
+  const goToNextQuestion = () => {
+    setTimer(20);
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+  };
+
+  // Finish Quiz
+  const finishQuiz = async () => {
+    setQuizFinished(true);
+    await submitResponses(responses);
+    navigate("/thank-you");
+  };
+
+  // Handle Option Selection and Submit Response
+  const handleOptionSelect = async (questionId, option) => {
     const updatedResponses = [...responses];
     const existingResponse = updatedResponses.find(
       (response) => response.question_id === questionId
@@ -99,84 +291,116 @@ const QuizQuestion = () => {
 
     setResponses(updatedResponses);
 
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      setQuizFinished(true);
+    try {
+      // Call the function to submit the response
+      await submitSingleResponse(questionId, option);
+
+      // After submission, go to the next question or finish quiz
+      if (currentQuestionIndex < questions.length - 1) {
+        goToNextQuestion();
+      } else {
+        finishQuiz();
+      }
+    } catch (error) {
+      console.error("Error submitting response:", error);
+      toast.error("Error submitting your response.");
     }
   };
 
-  // Submit Responses
-  const submitResponses = async (responses) => {
+  // Submit Single Response to the backend
+  const submitSingleResponse = async (questionId, selectedOption) => {
     try {
       const token = localStorage.getItem("access");
-      if (!token) throw new Error("No token found");
-
       const response = await fetch(
-        `http://127.0.0.1:8000/api/${participantId}/submit-responce/`,
+        `http://127.0.0.1:8000/api/${quizId}/submit-responce/`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          body: JSON.stringify({
+            participant_id: participantId,
+            question_id: questionId,
+            selected_option: selectedOption,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to submit response: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Error in submitting single response:", error);
+      throw error; // Re-throw error to handle in parent function
+    }
+  };
+
+  // Submit All Responses (if you want to add final submission functionality)
+  const submitResponses = async (responses) => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/${quizId}/submit-responce/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({ participant_id: participantId, responses }),
         }
       );
-      console.log("Submitting Responses:", { participant_id: participantId, responses });
+
       if (response.ok) {
-        const data = await response.json();
-        alert("Quiz submitted successfully!");
-        console.log("Submission Response:", data);
+        toast.success("Quiz submitted successfully!");
+        navigate("/thank-you");
       } else {
         throw new Error(`Failed to submit responses: ${response.status}`);
       }
     } catch (err) {
       console.error("Error submitting responses:", err);
-      setError(err.message);
+      toast.error(err.message || "Error submitting responses.");
     }
   };
 
   if (loading) return <div className="text-white text-center">Loading questions...</div>;
-  if (error) return <div className="text-red-500 text-center">{error}</div>;
   if (questions.length === 0) return <div className="text-white text-center">No questions available</div>;
 
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
     <div className="w-full h-screen bg-black text-white">
+      <ToastContainer />
       <div className="pt-8">
-        <div className="bg-gray-800 rounded-lg w-fit px-28 py-7 m-auto mb-10">
-          <h1 className="text-2xl mb-4">
-            Question No. {currentQuestionIndex + 1}
-          </h1>
+        {/* Timer Display */}
+        <div className="text-center text-3xl font-bold mb-6">Time Left: {timer}s</div>
+
+        {/* Question Box */}
+        <div
+          className="w-11/12 md:w-2/3 lg:w-1/2 bg-gray-800 rounded-lg w-fit px-28 py-7 m-auto mb-10 slide-animation transition-transform duration-500 ease-in-out transform"
+          key={currentQuestionIndex} // Key to trigger animation
+        >
+          <h1 className="text-2xl mb-4">Question No. {currentQuestionIndex + 1}</h1>
           <h2 className="text-base">{currentQuestion.text}</h2>
         </div>
-        <div className="options flex px-10 flex-wrap gap-10">
+
+        {/* Options */}
+        <div className="options flex px-10 flex-wrap gap-10 transition duration-300">
           {Object.entries(currentQuestion.options).map(([key, value], index) => (
-       <button
-            key={index}
-            className={`bg-blue-500 text-white pr-[35%] py-2 rounded-lg ${
-              index > 1 ? "mt-8" : ""
-            }`}
-            onClick={() => handleOptionSelect(currentQuestion.id, key)}
-          >
-            {key}. {value}
-          </button>
-        ))}
+            <button
+              key={index}
+              className={`option-button bg-blue-500 text-white py-3 px-6 rounded-lg transition-all ${{
+                0: "bg-red-500",
+                1: "bg-green-500",
+                2: "bg-blue-500",
+                3: "bg-purple-500",
+              }[index]}`}
+              onClick={() => handleOptionSelect(currentQuestion.id, key)}
+            >
+              {key}. {value}
+            </button>
+          ))}
         </div>
       </div>
-
-      {quizFinished && ( // Only show the button if quizFinished is true
-        <div className="text-center mt-8"> {/* Center the button */}
-          <button
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => submitResponses(responses)}
-          >
-            Submit Quiz
-          </button>
-        </div>
-      )}
     </div>
   );
 };
