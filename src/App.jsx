@@ -23,6 +23,7 @@ import QuizAnalysis from "./components/Pages/QUestion_report";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Quiz_User_Analysis from "./components/Quiz_User_analyis";
+import ThankYouPage from "./components/ThankYou";
 
 
 
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/quiz_user_history/:id" element={<Quiz_User_History />} />
         <Route path="/quiz_report" element={<QuizAnalysis />} />
         <Route path="/quiz_user_analysis" element={<Quiz_User_Analysis />} />
+        <Route path="/thank-you" element={<ThankYouPage />} />
       </Routes>
     </>
   );

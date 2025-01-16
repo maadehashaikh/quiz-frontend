@@ -4,8 +4,8 @@ import Dashboard_heading_buttons from "./Dashboard_heading_buttons";
 
 const Presentation = () => {
   return (
-    <div className="flex h-screen bg-black">
-      <div className="w-[17%] h-full bg-white">
+    <div className="flex flex-col md:flex-row h-screen bg-black">
+      <div className="w-full md:w-[17%] h-full bg-white">
         <Setting />
       </div>
       <div className="w-[85%] flex flex-col">
