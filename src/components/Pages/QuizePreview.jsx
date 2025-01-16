@@ -126,9 +126,11 @@ const QuizPreview = () => {
   }
 
   return (
-    <div className="p-6 bg-white text-black min-h-screen" >
-      <h1 className="text-3xl font-bold mb-4">Quiz Preview</h1>
-      <h2 className="text-xl">
+    <div className="p-6 bg-white text-black min-h-screen m-8 max-w-3xl " >
+      <h1 className="text-3xl px-6 font-bold mb-4">Quiz Preview</h1>
+      <div className="text-xl shadow-lg px-4 rounded-lg items-start">
+
+      <h2 className="">
       Title:{" "}
         {editing ? (
             <input
@@ -179,6 +181,7 @@ const QuizPreview = () => {
             quizDetails.description
           )}</h3>
       <h3>Quiz Code: {quizDetails.code}</h3>
+      </div>
       {editing && (
         <button
           className="bg-green-600 px-4 py-2 rounded-sm mt-2"
@@ -188,12 +191,12 @@ const QuizPreview = () => {
         </button>
       )}
 
-      <div className="mt-6" >
+      {/* <div className="mt-6" >
         {quizDetails.questions && quizDetails.questions.length > 0 ? (
           quizDetails.questions.map((question) => (
             <div
               key={question.id}
-              className="bg-white p-4 rounded-lg mb-4 shadow-lg"
+              className="bg-white p-4 rounded-lg mb-4 shadow-lg flex flex-col"
               
             >
               <h4 className="text-lg font-semibold">Q: {question.text}</h4>
@@ -224,7 +227,50 @@ const QuizPreview = () => {
         ) : (
           <p>No questions available for this quiz.</p>
         )}
+      </div> */}
+
+<div className="mt-6">
+  {quizDetails.questions && quizDetails.questions.length > 0 ? (
+    quizDetails.questions.map((question) => (
+      <div
+        key={question.id}
+        className="bg-white max-w-3xl mx-auto p-4 rounded-lg mb-4 shadow-lg flex flex-col"
+      >
+        <div className="flex justify-between items-center">
+          <h4 className="text-xl font-semibold flex-1">Q: {question.text}</h4>
+          <div className="flex space-x-1 mr-4 pe4 text-xl">
+            <button
+              className="text-red-600 hover:text-red-800 "
+              onClick={() => handleDeleteConfirmation(question.id)}
+              title="Delete Question"
+            >
+              <i className="fas fa-trash-alt"></i>
+            </button>
+            <button
+              className="text-yellow-500 hover:text-yellow-700"
+              onClick={() => navigate(`/EditQuestion/${question.id}`)}
+              title="Edit Question"
+            >
+              <i className="fas fa-edit"></i>
+            </button>
+          </div>
+        </div>
+        <ul className="mt-2 text-base space-y-2">
+          {Object.entries(question.options).map(([key, value]) => (
+            <li key={key}>
+              {key}: {value}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-2 text-green-400 text-base space-y-5">
+          Correct Option: {question.correct_option}
+        </p>
       </div>
+    ))
+  ) : (
+    <p>No questions available for this quiz.</p>
+  )}
+</div>
 
       <button
         className="bg-gray-500 px-4 py-2 mt-4 rounded-sm"

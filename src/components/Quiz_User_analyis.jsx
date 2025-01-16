@@ -89,12 +89,12 @@ const Quiz_User_Analysis = () => {
           />
         </div>
 
-    <div className="max-w-3xl mx-auto p-6 bg-black shadow rounded-lg">
+    <div className="flex flex-col justify-between items-center md:items-stretch rounded-lg bg-black">
        
       {/* Header Section */}
-      <div className="mb-6">
-        <h2 className="text-xl text-white font-semibold">Quiz Analysis</h2>
-        <p className="text-white">Details of all participants</p>
+      <div className="mb-6 mt-4 py-4">
+        <h2 className="text-xl text-white mt-4 text-center font-semibold">Quiz Analysis</h2>
+        <p className="text-white text-center mt-4">Details of all participants</p>
       </div>
 
       {/* Table Section */}
@@ -102,7 +102,8 @@ const Quiz_User_Analysis = () => {
         <table className="min-w-full bg-black border border-black">
           <thead>
             <tr>
-              <th className="py-2 px-4 text-left font-medium text-white">Name</th>
+              <th className="py-2 px-4  text-left font-medium text-white">No.</th>
+              <th className="py-2 px-4  text-left font-medium text-white">Name</th>
               <th className="py-2 px-4 font-medium text-white">Email</th>
               <th className="py-2 px-4 font-medium text-white">Total Attempts</th>
               <th className="py-2 px-4 font-medium text-white">Pass Count</th>
@@ -112,6 +113,7 @@ const Quiz_User_Analysis = () => {
           <tbody>
             {students.map((student, index) => (
               <tr key={index} className="border-b last:border-none">
+                <td className="py-2 px-4 text-gray-400">{index+1}</td>
                 <td className="py-2 px-4 text-white">{student.name}</td>
                 <td className="py-2 px-4 text-white">{student.email || "N/A"}</td>
                 <td className="py-2 px-4 text-white">{student.total_attempts}</td>
