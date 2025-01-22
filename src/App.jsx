@@ -24,12 +24,15 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Quiz_User_Analysis from "./components/Quiz_User_analyis";
 import ThankYouPage from "./components/ThankYou";
+import { ThemeProvider } from "./components/TheamContext";
 
 
 
 const App = () => {
   return (
     <>
+    <ThemeProvider>
+
     <ToastContainer />
       <Navbar />
       <Routes>
@@ -53,8 +56,11 @@ const App = () => {
         <Route path="/quiz_user_history/:id" element={<Quiz_User_History />} />
         <Route path="/quiz_report" element={<QuizAnalysis />} />
         <Route path="/quiz_user_analysis" element={<Quiz_User_Analysis />} />
-        <Route path="/thank-you" element={<ThankYouPage />} />
+        <Route path="/thank-you/:participantId" element={<ThankYouPage />} />
+        
+        
       </Routes>
+    </ThemeProvider>
     </>
   );
 };

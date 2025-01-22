@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useTheme } from "../TheamContext";
 
 const EditMCQ = () => {
   const { id } = useParams(); // MCQ ID from the URL
@@ -9,6 +10,8 @@ const EditMCQ = () => {
     options: { A: "", B: "", C: "", D: "" },
     correct_option: "",
   });
+  const {theme} = useTheme();
+  const bgClass = theme === "dark" ? "bg-black text-white" : "bg-white text-black";
 
   // Fetch the current MCQ details
   useEffect(() => {
@@ -83,11 +86,11 @@ const EditMCQ = () => {
   };
 
   return (
-    <div className="p-6 bg-black text-white min-h-screen">
+    <div className={`p-6 ${bgClass} min-h-screen`}>
       <h1 className="text-3xl font-bold mb-4">Edit MCQ</h1>
-      <form onSubmit={handleSubmit} className="bg-gray-800 p-4 rounded-lg">
+      <form onSubmit={handleSubmit} className="bg-gray-800 p-4 rounded-lg text-white" >
         <div className="mb-4">
-          <label className="block font-semibold mb-2">Question Text</label>
+          <label className="block font-semibold mb-2 ">Question Text</label>
           <textarea
             name="text"
             value={formData.text}

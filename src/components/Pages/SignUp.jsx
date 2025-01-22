@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTheme } from "../TheamContext";
 
 const SignUp = () => {
   const [signUpdata, setSignUpdata] = useState({
@@ -8,9 +9,11 @@ const SignUp = () => {
     role: "",
   });
   const { name, email, password, role } = signUpdata;
+  const {theme} = useTheme();
   const onChange = (e) => {
     setSignUpdata({ ...signUpdata, [e.target.name]: e.target.value });
   };
+  const bgClass = theme === "dark" ? "bg-black text-white" : "bg-white text-black";
 
   const submitData = async (e) => {
     e.preventDefault();
@@ -37,10 +40,10 @@ const SignUp = () => {
   };
 
   return (
-    <div className="w-full h-[88.5vh] bg-black">
+    <div className={`w-full h-[88.5vh] ${bgClass}`}>
       <div
-        className=" flex flex-col w-fit items-center justify-center m-auto px-5 text-white 
-      bg-black pt-10"
+        className={`flex flex-col w-fit items-center justify-center m-auto px-5 
+     ${bgClass} pt-10`}
       >
         <h1 className="text-3xl font-medium ">SIGN UP</h1>
         <p className="text-lg font-base font-sans mb-4">

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { useTheme } from "../TheamContext";
 
 
 const Login = () => {
   const navigate = useNavigate();
+  const {theme} = useTheme();
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -49,10 +51,11 @@ const Login = () => {
       console.error("Error during login:", error);
     }
   };
+  const bgClass = theme === "dark" ? "bg-black text-white" : "bg-white text-black";
   return (
     <div>
-      <div className="w-full h-[88.5vh] bg-black">
-        <div className=" flex flex-col w-fit items-center justify-center m-auto px-5 text-white bg-black pt-2 ">
+      <div className={`w-full h-[88.5vh] ${bgClass}`}>
+        <div className={`flex flex-col w-fit items-center justify-center m-auto px-5  ${bgClass} pt-2 `}>
           <h1 className="text-3xl font-medium mb-3">LOGIN</h1>
           <p className="text-lg font-base font-sans mb-4">
             Welcome back <span className="text-red-500 font-bold">!</span>{" "}
@@ -104,7 +107,7 @@ const Login = () => {
             </div>
 
             <button
-              className="flex text-white px-12 py-3 rounded-lg m-auto text-lg font-semibold"
+              className="flex px-12 py-3 rounded-lg m-auto text-lg font-semibold"
               style={{ backgroundColor: "#CD181F" }}
             >
               Login Now
@@ -113,10 +116,11 @@ const Login = () => {
             {/* Login with others */}
             <div class="flex items-center my-5">
               <div class="flex-grow border-t-2 border-gray-300"></div>
-              <span class="mx-4 text-md font-medium text-gray-500 font-sans">
-                <span className="text-white font-base mr-1 text-lg font-sans">
+              <span class="mx-4 text-md font-medium  font-sans">
+                <span className=" font-base mr-1 text-lg font-sans">
                   Login
                 </span>
+                
                 with Others
               </span>
               <div class="flex-grow border-t-2 border-gray-300"></div>

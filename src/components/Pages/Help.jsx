@@ -1,10 +1,14 @@
 
 
 import React from "react";
+import { useTheme } from "../TheamContext";
 
-const Help = () => {
+const Help = () =>{
+  const { theme } = useTheme();
+  const bgClass = theme === "dark" ? "bg-black text-white" : "bg-white text-black";
+  const bgLine = theme === "dark" ?"bg-white text-black": "bg-black text-white"  ;
   return (
-    <div className="bg-black text-white font-sans">
+    <div className={`${bgClass}  font-sans`}>
       {/* Navbar */}
       
 
@@ -14,7 +18,7 @@ const Help = () => {
         <h1 className="text-4xl font-bold text-red-500">ASK US ANYTHING</h1>
         <p className="mt-4 text-lg">Have any questions? We're here to assist you.</p>
 
-        <div className="mt-6 mx-auto w-4/5 md:w-1/2">
+        <div className="mt-6 border border-gray-600 rounded-md mx-auto w-4/5 md:w-1/2">
           <input
             type="text"
             placeholder="Search here"

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { useTheme } from "../TheamContext";
 
 
 const QuizQuestion = () => {
@@ -12,7 +13,9 @@ const QuizQuestion = () => {
   const [loading, setLoading] = useState(true);
   const [timer, setTimer] = useState(20);
   const [quizFinished, setQuizFinished] = useState(false);
+  const {theme} = useTheme();
 
+  const bgClass = theme === "dark" ? "bg-black text-white" : "bg-white text-black";
   // Fetch Questions
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -151,23 +154,25 @@ const QuizQuestion = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div className="w-full h-screen bg-black text-white">
+    <div className={`w-full h-screen ${bgClass}`}>
       <ToastContainer />
-      <div className="pt-8">
+      <div className="pt-8 ">
         {/* Timer Display */}
-        <div className="text-center text-3xl font-bold mb-6">Time Left: {timer}s</div>
+        <div className="text-center text-3xl font-bold mb-6 text-red-600">Time Left: {timer}s</div>
 
         {/* Question Box */}
         <div
           className="w-11/12 md:w-2/3 lg:w-1/2 bg-gray-800 rounded-lg w-fit px-28 py-7 m-auto mb-10 slide-animation transition-transform duration-500 ease-in-out transform"
           key={currentQuestionIndex} // Key to trigger animation
         >
-          <h1 className="text-2xl mb-4">Question No. {currentQuestionIndex + 1}</h1>
-          <h2 className="text-base">{currentQuestion.text}</h2>
+          <h1 className="text-2xl mb-4 text-white">Question No. {currentQuestionIndex + 1}</h1>
+          <h2 className="text-base text-white">{currentQuestion.text}</h2>
         </div>
 
+        <div className="flex justify-center items-center">
+
         {/* Options */}
-        <div className="options flex px-10 flex-wrap gap-10 transition duration-300">
+        <div className="m-auto options flex px-10 flex-wrap gap-10 transition duration-300 items-center text-center">
           {Object.entries(currentQuestion.options).map(([key, value], index) => (
             <button
               key={index}
@@ -183,6 +188,8 @@ const QuizQuestion = () => {
             </button>
           ))}
         </div>
+        </div>
+
       </div>
       
     </div>

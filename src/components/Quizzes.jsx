@@ -3,11 +3,13 @@ import Setting from "./Setting";
 import Dashboard_heading_buttons from "./Dashboard_heading_buttons";
 import { useNavigate, NavLink } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { useTheme } from "./TheamContext";
 
 const Quizzes = () => {
   const [quizzes, setQuizzes] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [quizToDelete, setQuizToDelete] = useState(null);
+  const { theme } = useTheme();
 
   const navigate = useNavigate();
 
@@ -104,19 +106,21 @@ const Quizzes = () => {
   if (!quizzes) {
     return <p>Loading...</p>;
   }
-
+ 
   return (
-    <div className="flex flex-col md:flex-row h-screen bg-black">
+    <div className={`${theme === "dark" ? "bg-black text-white" : "bg-white text-black"} p-6`}>
+
+    <div className="flex flex-col md:flex-row h-screen ">
       <div className="w-full md:w-[17%] h-full bg-white">
         <Setting />
       </div>
       <div className="w-full md:w-[85%] flex flex-col">
-        <div className="h-[14%] bg-black text-white">
+        <div className="h-[14%] ">
           <Dashboard_heading_buttons
             heading={"Quizzes"}
             button1={"Scheduled Quizzes"}
-            button2={"Question Bank"}
-            button3={"History"}
+            // button2={"Question Bank"}
+            // button3={"History"}
           />
         </div>
         <div className="flex flex-col md:flex-row-reverse justify-between items-start md:items-stretch rounded-lg bg-black">
@@ -207,6 +211,8 @@ const Quizzes = () => {
         </div>
       )}
     </div>
+    </div>
+   
   );
 };
 

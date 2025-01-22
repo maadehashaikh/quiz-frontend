@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useTheme } from "../TheamContext";
 
 const QuizPreview = () => {
   const { id } = useParams();
@@ -10,6 +11,7 @@ const QuizPreview = () => {
   const [updatedQuiz, setUpdatedQuiz] = useState({});
   const [showPopup, setShowPopup] = useState(false);
   const [quizToDelete, setQuizToDelete] = useState(null);
+  const { theme } = useTheme();
 
   const fetchWithAuth = async (url, options = {}) => {
     try {
@@ -126,7 +128,9 @@ const QuizPreview = () => {
   }
 
   return (
-    <div className="p-6 bg-white text-black min-h-screen m-8 max-w-3xl " >
+    <div className={`min-h-screen p-8 ${theme === "dark" ? "bg-black text-white" : "bg-white text-black"}`}>
+
+    <div className={`p-8  min-h-screen  max-w-3xl`} >
       <h1 className="text-3xl px-6 font-bold mb-4">Quiz Preview</h1>
       <div className="text-xl shadow-lg px-4 rounded-lg items-start">
 
@@ -234,7 +238,7 @@ const QuizPreview = () => {
     quizDetails.questions.map((question) => (
       <div
         key={question.id}
-        className="bg-white max-w-3xl mx-auto p-4 rounded-lg mb-4 shadow-lg flex flex-col"
+        className="bg-white max-w-3xl text-black mx-auto p-4 rounded-lg mb-4 shadow-lg flex flex-col"
       >
         <div className="flex justify-between items-center">
           <h4 className="text-xl font-semibold flex-1">Q: {question.text}</h4>
@@ -301,6 +305,7 @@ const QuizPreview = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };

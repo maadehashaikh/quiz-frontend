@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "antd": "^5.23.2",
+    "atd": "^0.2.0",
     "chart.js": "^4.4.7",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.4.0",
     "react-router-dom": "^6.28.0",
     "react-toastify": "^11.0.2"
   },

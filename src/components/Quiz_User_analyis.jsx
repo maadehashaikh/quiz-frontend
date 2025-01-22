@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Setting from "./Setting";
 import Dashboard_heading_buttons from "./Dashboard_heading_buttons";
+import { useTheme } from "./TheamContext";
 
 const Quiz_User_Analysis = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const {theme }= useTheme();
+  const bgClass = theme === "dark" ? "bg-black text-white" : "bg-white text-black border-black";
 
   const fetchQuizAnalysis = async () => {
     try {
@@ -77,7 +80,7 @@ const Quiz_User_Analysis = () => {
   }
 
   return (
-    <div className="flex h-screen bg-black">
+    <div className={`flex h-screen ${bgClass}`}>
       <div className="w-[17%] h-full bg-white">
         <Setting />
       </div>
@@ -89,36 +92,36 @@ const Quiz_User_Analysis = () => {
           />
         </div>
 
-    <div className="flex flex-col justify-between items-center md:items-stretch rounded-lg bg-black">
+    <div className={`flex flex-col justify-between items-center md:items-stretch rounded-lg ${bgClass}`}>
        
       {/* Header Section */}
       <div className="mb-6 mt-4 py-4">
-        <h2 className="text-xl text-white mt-4 text-center font-semibold">Quiz Analysis</h2>
-        <p className="text-white text-center mt-4">Details of all participants</p>
+        <h2 className="text-3xl  mt-4 text-center font-semibold">Quiz Analysis</h2>
+        <p className="text-center mt-4">Details of all participants</p>
       </div>
 
       {/* Table Section */}
       <div>
-        <table className="min-w-full bg-black border border-black">
+        <table className="min-w-full border border-black">
           <thead>
             <tr>
-              <th className="py-2 px-4  text-left font-medium text-white">No.</th>
-              <th className="py-2 px-4  text-left font-medium text-white">Name</th>
-              <th className="py-2 px-4 font-medium text-white">Email</th>
-              <th className="py-2 px-4 font-medium text-white">Total Attempts</th>
-              <th className="py-2 px-4 font-medium text-white">Pass Count</th>
-              <th className="py-2 px-4 font-medium text-white">Fail Count</th>
+              <th className="py-2 px-4  text-left font-medium ">No.</th>
+              <th className="py-2  px-4  text-left font-medium ">Name</th>
+              <th className="py-2 pl-20 px-4 text-left font-medium ">Email</th>
+              <th className="py-2 pl-20 px-4 text-left font-medium ">Total Attempts</th>
+              <th className="py-2 pl-20 px-4 text-left font-medium ">Pass Count</th>
+              <th className="py-2 pl-20 px-4 text-left font-medium ">Fail Count</th>
             </tr>
           </thead>
           <tbody>
             {students.map((student, index) => (
               <tr key={index} className="border-b last:border-none">
                 <td className="py-2 px-4 text-gray-400">{index+1}</td>
-                <td className="py-2 px-4 text-white">{student.name}</td>
-                <td className="py-2 px-4 text-white">{student.email || "N/A"}</td>
-                <td className="py-2 px-4 text-white">{student.total_attempts}</td>
-                <td className="py-2 px-4 text-green-500">{student.pass_count}</td>
-                <td className="py-2 px-4 text-red-500">{student.fail_count}</td>
+                <td className="py-2 px-4 ">{student.name}</td>
+                <td className="py-2 pl-20 px-4 ">{student.email || "N/A"}</td>
+                <td className="py-2 pl-20 px-4 ">{student.total_attempts}</td>
+                <td className="py-2 pl-20 px-4 text-green-500">{student.pass_count}</td>
+                <td className="py-2 pl-20 px-4 text-red-500">{student.fail_count}</td>
               </tr>
             ))}
           </tbody>

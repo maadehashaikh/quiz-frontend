@@ -170,6 +170,7 @@
 import React, { useState, useEffect } from "react";
 import Setting from "./Setting";
 import Dashboard_heading_buttons from "./Dashboard_heading_buttons";
+import { toast } from "react-toastify";
 
 const User_dashboard = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -202,11 +203,12 @@ const User_dashboard = () => {
             language: data.language,
           });
         } else {
-          alert("Error fetching user data: " + JSON.stringify(data));
+          toast.error("Error fetching user data: " );
+          console.log("Error fetching user data: " + JSON.stringify(data))
         }
       } catch (error) {
         console.error("Error:", error);
-        alert("An error occurred while fetching user data.");
+        toast.error("An error occurred while fetching user data.");
       }
     };
 
@@ -238,14 +240,14 @@ const User_dashboard = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        alert("User data updated successfully!");
+        toast.success("User data updated successfully!");
         setIsEditing(false); // Exit edit mode
       } else {
-        alert("Error updating user data: " + JSON.stringify(data));
+        toast.error("Error updating user data: " + JSON.stringify(data));
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred while updating user data.");
+      toast.error("An error occurred while updating user data.");
     }
   };
 

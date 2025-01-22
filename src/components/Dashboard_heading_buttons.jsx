@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useTheme } from "./TheamContext";
 const Dashboard_heading_buttons = ({
   heading,
   button1,
@@ -8,8 +8,9 @@ const Dashboard_heading_buttons = ({
   button4,
   button5,
 }) => {
+  const { theme } = useTheme();
   return (
-    <div className="relative">
+    <div className={`relative bg-black rounded`}>
       <h1 className="font-medium text-2xl ml-8 text-gray-300">{heading}</h1>
       <div className="border-b-gray-400 border-b-2 flex gap-3 mt-3">
         <button className="bg-white text-red-500 rounded-sm py-1 px-3 ml-8">
