@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTheme } from "../TheamContext";
+import { FiEdit } from "react-icons/fi";
 
 const QuizPreview = () => {
   const { id } = useParams();
@@ -95,8 +96,44 @@ const QuizPreview = () => {
     setShowPopup(true);
   };
 
-  const handleSave = async () => {
+
+  const handleInputChange = (e, field) => {
+    setUpdatedQuiz((prev) => ({
+      ...prev,
+      [field]: e.target.value,
+    }));
   };
+  const handleSave = async () => {
+    try {
+      const token = localStorage.getItem("access");
+      const refreshToken = localStorage.getItem("refresh");
+      const response = await fetchWithAuth(
+        `http://127.0.0.1:8000/api/mcqs/editQuiz/${id}/`,
+        {
+          method: "PUT",
+          headers: { 
+            "Content-Type": "application/json" ,
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(updatedQuiz),
+        }
+      );
+  
+      if (response.ok) {
+        const updatedData = await response.json();
+        setQuizDetails(updatedData);
+        setEditing(false);
+        toast.success("Quiz updated successfully!");
+        navigate(`/QuizPreview/${id}`)
+      } else {
+        toast.error("Failed to update quiz.");
+      }
+    } catch (error) {
+      console.error("Error during save:", error);
+      toast.error("An error occurred while saving changes.");
+    }
+  };
+
   const handleDelete = async () => {
     try {
       const response = await fetchWithAuth(
@@ -131,70 +168,91 @@ const QuizPreview = () => {
     <div className={`min-h-screen p-8 ${theme === "dark" ? "bg-black text-white" : "bg-white text-black"}`}>
 
     <div className={`p-8  min-h-screen  max-w-3xl`} >
-      <h1 className="text-3xl px-6 font-bold mb-4">Quiz Preview</h1>
-      <div className="text-xl shadow-lg px-4 rounded-lg items-start">
+      <div className="flex">
 
-      <h2 className="">
-      Title:{" "}
-        {editing ? (
-            <input
-              type="text"
-              value={updatedQuiz.title}
-              onChange={(e) => handleInputChange(e, "title")}
-              className="text-white bg-black px-2 py-1 rounded"
-            />
-          ) : (
-            quizDetails.title
-          )}
-           <button
-            className="ml-2 text-yellow-400"
-            onClick={() => setEditing((prev) => !prev)}
+      <h1 className="flex-1 text-3xl px-6 font-bold mb-4">Quiz Preview</h1>
+      <button
+      className="flex bg-blue-600 hover:bg-blue-700 text-white w-[20%] text-center px-4 py-2 m-4 rounded"
+            onClick={() => navigate(`/quiz_user_history/${id}`)}
           >
-            ✏️
-          </button></h2>
-          <h3>Course: {" "}
-          {editing ? (
-            <input
-              type="text"
-              value={updatedQuiz.course_name}
-              onChange={(e) => handleInputChange(e, "course_name")}
-              className="text-white bg-black px-2 py-1 rounded"
-            />
-          ) : (
-            quizDetails.course_name
-          )}</h3>
-      <h3>Subject: {" "}
-          {editing ? (
-            <input
-              type="text"
-              value={updatedQuiz.subject}
-              onChange={(e) => handleInputChange(e, "subject")}
-              className="text-white bg-black px-2 py-1 rounded"
-            />
-          ) : (
-            quizDetails.subject
-          )}</h3>
-          <h3>Description: {" "}
-          {editing ? (
-            <textarea
-              value={updatedQuiz.description}
-              onChange={(e) => handleInputChange(e, "description")}
-              className="text-white bg-black px-2 py-1 rounded w-30"
-            />
-          ) : (
-            quizDetails.description
-          )}</h3>
-      <h3>Quiz Code: {quizDetails.code}</h3>
+            Quiz History
+      </button>
       </div>
-      {editing && (
-        <button
-          className="bg-green-600 px-4 py-2 rounded-sm mt-2"
-          onClick={handleSave}
-        >
-          Save Changes
-        </button>
-      )}
-
+      <div className="text-xl shadow-lg p-6 rounded-lg bg-black text-gray-100">
+  <h2 className="mb-4 flex items-center">
+    <span className="font-semibold mr-2">Title:</span>
+    {editing ? (
+      <input
+        type="text"
+        value={updatedQuiz.title}
+        onChange={(e) => handleInputChange(e, "title")}
+        className="text-gray-800 bg-gray-200 px-3 py-2 rounded border border-gray-300 w-full"
+      />
+    ) : (
+      <span>{quizDetails.title}</span>
+    )}
+    <button
+      className="ml-3 text-blue-500 hover:text-blue-700"
+      onClick={() => setEditing((prev) => !prev)}
+    >
+      <FiEdit size={18} />
+    </button>
+  </h2>
+  
+  <h3 className="mb-4">
+    <span className="font-semibold mr-2">Course:</span>
+    {editing ? (
+      <input
+        type="text"
+        value={updatedQuiz.course_name}
+        onChange={(e) => handleInputChange(e, "course_name")}
+        className="text-gray-800 bg-gray-200 px-3 py-2 rounded border border-gray-300 w-full"
+      />
+    ) : (
+      <span>{quizDetails.course_name}</span>
+    )}
+  </h3>
+  
+  <h3 className="mb-4">
+    <span className="font-semibold mr-2">Subject:</span>
+    {editing ? (
+      <input
+        type="text"
+        value={updatedQuiz.subject}
+        onChange={(e) => handleInputChange(e, "subject")}
+        className="text-gray-800 bg-gray-200 px-3 py-2 rounded border border-gray-300 w-full"
+      />
+    ) : (
+      <span>{quizDetails.subject}</span>
+    )}
+  </h3>
+  
+  <h3 className="mb-4">
+    <span className="font-semibold mr-2">Description:</span>
+    {editing ? (
+      <textarea
+        value={updatedQuiz.description}
+        onChange={(e) => handleInputChange(e, "description")}
+        className="text-gray-800 bg-gray-200 px-3 py-2 rounded border border-gray-300 w-full h-24"
+      />
+    ) : (
+      <span>{quizDetails.description}</span>
+    )}
+  </h3>
+  
+  <h3 className="font-semibold">
+    Quiz Code: <span className="font-normal">{quizDetails.code}</span>
+  </h3>
+  
+  {editing && (
+    <button
+      className="bg-blue-600 text-white px-4 py-2 rounded mt-4 hover:bg-blue-700"
+      onClick={handleSave}
+    >
+      Save Changes
+    </button>
+  )}
+</div>
       {/* <div className="mt-6" >
         {quizDetails.questions && quizDetails.questions.length > 0 ? (
           quizDetails.questions.map((question) => (
@@ -252,7 +310,7 @@ const QuizPreview = () => {
             </button>
             <button
               className="text-yellow-500 hover:text-yellow-700"
-              onClick={() => navigate(`/EditQuestion/${question.id}`)}
+              onClick={() => navigate(`/EditQuestion/${question.id}/${id}`)}
               title="Edit Question"
             >
               <i className="fas fa-edit"></i>
@@ -287,7 +345,7 @@ const QuizPreview = () => {
       {showPopup && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold">Are you sure you want to delete this question?</h3>
+            <h3 className="text-xl font-semibold text-black">Are you sure you want to delete this question?</h3>
             <div className="mt-4 flex justify-between">
               <button
                 className="bg-green-500 px-4 py-2 rounded-sm"

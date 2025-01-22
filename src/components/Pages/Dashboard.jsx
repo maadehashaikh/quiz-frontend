@@ -5,7 +5,7 @@ import Dashboard_heading_buttons from "../Dashboard_heading_buttons";
 const Dashboard = () => {
   return (
     <div className="flex h-screen bg-black">
-      <div className="w-[17%] h-full bg-white">
+      <div className="w-[17%] h-full bg-black">
         <Setting />
       </div>
       <div className="w-[85%] flex flex-col">

@@ -52,7 +52,7 @@ const App = () => {
         <Route path="/live_polling" element={<Live_polling />} /> 
         <Route path="/GenrateQuize" element={<GenerateQuiz />} />
         <Route path="/QuizPreview/:id" element={<QuizPreview />} />
-        <Route path="/EditQuestion/:id" element={<EditQuestion />} />
+        <Route path="/EditQuestion/:id/:quizId" element={<EditQuestion />} />
         <Route path="/quiz_user_history/:id" element={<Quiz_User_History />} />
         <Route path="/quiz_report" element={<QuizAnalysis />} />
         <Route path="/quiz_user_analysis" element={<Quiz_User_Analysis />} />

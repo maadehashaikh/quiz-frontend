@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTheme } from "../TheamContext";
+import { toast } from 'react-toastify';
 
 const EditMCQ = () => {
-  const { id } = useParams(); // MCQ ID from the URL
+  const { id, quizId } = useParams(); // MCQ ID from the URL
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     text: "",
@@ -75,10 +76,11 @@ const EditMCQ = () => {
       });
 
       if (response.ok) {
-        alert("MCQ updated successfully!");
-        navigate(`/QuizPreview/${id}`); // Navigate to quiz preview page
+        toast.success("MCQ updated successfully!");
+        navigate(`/QuizPreview/${quizId}`); // Navigate to quiz preview page
       } else {
         console.error("Failed to update MCQ");
+        toast.error("Failed to update MCQ")
       }
     } catch (error) {
       console.error("Error updating MCQ:", error);

@@ -108,10 +108,10 @@ const Quizzes = () => {
   }
  
   return (
-    <div className={`${theme === "dark" ? "bg-black text-white" : "bg-white text-black"} p-6`}>
+    <div className={`${theme === "dark" ? "bg-black text-white" : "bg-white text-black"} `}>
 
     <div className="flex flex-col md:flex-row h-screen ">
-      <div className="w-full md:w-[17%] h-full bg-white">
+      <div className={`w-full md:w-[17%] h-full bg-black ${theme === "dark" ? "bg-black text-white" : "bg-white text-black"}`}>
         <Setting />
       </div>
       <div className="w-full md:w-[85%] flex flex-col">
@@ -130,8 +130,8 @@ const Quizzes = () => {
             >
               + Create New (AI)
             </button>
-            <button className="bg-white text-red-600 py-2 px-4 mt-3 rounded-sm">
-              + New From blank (AI)
+            <button onClick={() => navigate("/quiz_report")} className="bg-white text-red-600 py-2 px-4 mt-3 rounded-sm">
+              Quiz Report
             </button>
             <button className="bg-white text-red-600 py-2 mt-3 rounded-sm">
               <i className="fa-solid fa-file-import"></i> Import
@@ -164,12 +164,7 @@ const Quizzes = () => {
                     >
                       View Details
                     </button>
-                    <button
-                      className="bg-blue-600 hover:bg-blue-700 text-white w-full py-2 mt-4 rounded"
-                      onClick={() => navigate(`/quiz_user_history/${quiz.id}`)}
-                    >
-                      Quiz history
-                    </button>
+                  
 
                     <button
                       className="bg-red-600 hover:bg-red-700 text-white w-full py-2 mt-2 rounded"

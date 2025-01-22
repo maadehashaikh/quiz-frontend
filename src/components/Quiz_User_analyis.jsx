@@ -81,7 +81,7 @@ const Quiz_User_Analysis = () => {
 
   return (
     <div className={`flex h-screen ${bgClass}`}>
-      <div className="w-[17%] h-full bg-white">
+      <div className={`w-[17%] h-full ${bgClass}`}>
         <Setting />
       </div>
       <div className="w-[85%] flex flex-col">
@@ -101,7 +101,7 @@ const Quiz_User_Analysis = () => {
       </div>
 
       {/* Table Section */}
-      <div>
+      <div className="px-6">
         <table className="min-w-full border border-black">
           <thead>
             <tr>

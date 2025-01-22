@@ -122,8 +122,10 @@ const Setting = () => {
       </button>
 
       {/* Sidebar Menu */}
+     
+
       <div
-        className={`fixed top-18 left-0 h-full bg-gray-100 shadow-lg transition-transform duration-300 z-20 w-3/4 md:w-1/4 lg:w-[16%] ${
+        className={`fixed top-18 left-0 h-full bg-gray-100 shadow-lg transition-transform duration-300 z-20 w-3/4 md:w-1/4 lg:w-[17%] ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
@@ -179,9 +181,9 @@ const Setting = () => {
           >
             <i className="fa-solid fa-chart-line mr-3"></i> Analytics
           </NavLink>
-          <div className="text-gray-400 flex items-center gap-3 py-2 hover:text-red-600">
+          {/* <div className="text-gray-400 flex items-center gap-3 py-2 hover:text-red-600">
             <i className="fa-solid fa-bell"></i> Notification
-          </div>
+          </div> */}
           <NavLink
             to="/settings"
             className={({ isActive }) =>
@@ -196,6 +198,7 @@ const Setting = () => {
           </NavLink>
         </div>
       </div>
+     
 
       {/* Overlay for Mobile Menu */}
       {isMenuOpen && (

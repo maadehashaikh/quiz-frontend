@@ -91,7 +91,7 @@ const User_dashboard = () => {
     
   <div className={`flex h-screen ${bgClass}`}>
     {/* Sidebar */}
-    <div className="w-[17%] h-full bg-white shadow-md">
+    <div className={` w-[17%] h-full ${bgClass} shadow-md`}>
       <Setting />
     </div>
      {/* <Setting /> */}
@@ -107,7 +107,7 @@ const User_dashboard = () => {
       </div>
 
       {/* Main Body */}
-      <div className="h-[74%] rounded-lg bg-white mx-8 mt-4 p-6 shadow-lg border border-gray-300">
+      <div className="h-[74%] rounded-lg bg-white mx-8 mt-4 p-6 shadow-lg border border-gray-300 ">
         <div className="flex items-center justify-between border-b pb-4">
           <div className="flex gap-5">
             <i className="fa-solid fa-user text-red-500 text-3xl bg-red-100 px-6 py-4 rounded-full"></i>
@@ -229,6 +229,101 @@ const User_dashboard = () => {
       </div>
     </div>
 </div>
+
+
+//  <div className="flex h-screen">
+//   {/* Sidebar */}
+//   <div className="fixed top-20 left-0 h-full w-[16%] bg-white shadow-md">
+//     <Setting />
+//   </div>
+
+//   {/* Main Content */}
+//   <div className="flex flex-col ml-[16%] w-[84%]">
+ 
+//        {/* Header */}
+//        <div className="h-[14%] bg-black text-white flex items-center px-8">
+//          <Dashboard_heading_buttons
+//           heading={"My Settings"}
+//           button1={"Profile Settings"}
+//         />
+//       </div>
+
+//     {/* Main Body */}
+//     <div className="flex-grow bg-gray-50 p-6 overflow-y-auto">
+//       <div className="h-full rounded-lg bg-white shadow-lg border border-gray-300 p-6">
+//         <div className="flex items-center justify-between border-b pb-4">
+//           <div className="flex gap-5">
+//             <i className="fa-solid fa-user text-red-500 text-3xl bg-red-100 px-6 py-4 rounded-full"></i>
+//             <div>
+//               <h1 className="text-xl font-semibold">{formData.name}</h1>
+//               <p className="text-gray-500">{formData.email}</p>
+//             </div>
+//           </div>
+//           <button
+//             className="bg-red-500 text-white rounded-md px-6 py-2 font-medium shadow hover:bg-red-600 transition"
+//             onClick={isEditing ? submitData : toggleEdit}
+//           >
+//             {isEditing ? "Save" : "Edit"}
+//           </button>
+//         </div>
+
+//         {/* Non-editable Fields */}
+//         {!isEditing && (
+//           <div className="mt-6">
+//             <div className="grid grid-cols-2 gap-8">
+//               <div>
+//                 <label className="block text-gray-600 font-medium">Full Name</label>
+//                 <p className="mt-1 text-gray-800">{formData.name}</p>
+//               </div>
+//               <div>
+//                 <label className="block text-gray-600 font-medium">Email</label>
+//                 <p className="mt-1 text-gray-800">{formData.email}</p>
+//               </div>
+//             </div>
+//             <div className="grid grid-cols-2 gap-8 mt-6">
+//               <div>
+//                 <label className="block text-gray-600 font-medium">Gender</label>
+//                 <p className="mt-1 text-gray-800">{formData.gender}</p>
+//               </div>
+//               <div>
+//                 <label className="block text-gray-600 font-medium">Country</label>
+//                 <p className="mt-1 text-gray-800">{formData.country}</p>
+//               </div>
+//             </div>
+//           </div>
+//         )}
+
+//         {/* Editable Fields */}
+//         {isEditing && (
+//           <form className="mt-6">
+//             <div className="grid grid-cols-2 gap-8">
+//               <div>
+//                 <label className="block text-gray-600 font-medium">Full Name</label>
+//                 <input
+//                   name="name"
+//                   value={formData.name}
+//                   onChange={handleInputChange}
+//                   type="text"
+//                   className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 mt-2"
+//                 />
+//               </div>
+//               <div>
+//                 <label className="block text-gray-600 font-medium">Email</label>
+//                 <input
+//                   name="email"
+//                   value={formData.email}
+//                   onChange={handleInputChange}
+//                   type="email"
+//                   className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 mt-2"
+//                 />
+//               </div>
+//             </div>
+//           </form>
+//         )}
+//       </div>
+//     </div>
+//   </div>
+// </div> 
 
   );
 };
