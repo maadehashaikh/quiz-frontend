@@ -14,8 +14,6 @@ const SettingPage = () => {
           <Dashboard_heading_buttons
             heading={"My Settings"}
             button1={"Profile Settings"}
-            button2={"Account Settings"}
-            button3={"Prefrences"}
           />
         </div>
         <div className="h-[74%] bg-white rounded-lg ">

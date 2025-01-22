@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
+import { useTheme } from "../TheamContext";
 const GenerateQuiz = () => {
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState(null);
   const [examplePrompts, setExamplePrompts] = useState([]);
   const navigate = useNavigate();
+  const {theme} = useTheme();
+  const bgClass = theme === "dark" ? "bg-black text-white" : "bg-white text-black";
 
   // Fetch example prompts from the API
   useEffect(() => {
@@ -102,11 +105,11 @@ const GenerateQuiz = () => {
   };
 
   return (
-    <div className="w-full h-screen bg-black text-white flex flex-col items-center justify-center">
+    <div className={`"w-full h-screen ${bgClass} flex flex-col items-center justify-center"`}>
       <h1 className="text-4xl font-bold mb-4">Generate Quiz</h1>
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
         <textarea
-          className="text-black p-4 w-96 h-20 rounded-lg mb-4"
+          className="text-black p-4 border border-black  w-96 h-20 rounded-lg mb-4"
           placeholder="Describe your prompt for the Quiz"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
