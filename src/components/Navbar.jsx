@@ -135,6 +135,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "./TheamContext";
 import logo from "../Images/logo.png";
 import whiteLogo from "../Images/whiteLogo.png"
+import Setting from "./Setting";
 import {
   FaBell,
   FaUser,
@@ -312,11 +313,14 @@ const Navbar = () => {
         theme === "dark" ? "bg-black text-white" : "bg-white text-black"
       }`}
     >
-      <div className="flex items-center justify-between px-4 py-4">
-        <div>
-          
-          <img src={theme == "dark" ?  logo : whiteLogo} alt="Logo" className="w-[120px]" />
+  
+      <div className="flex items-center justify-between  py-4">
+    
+
+        <div className="">
+        <img src={theme == "dark" ?  logo : whiteLogo} alt="Logo" className="w-[120px]" />
         </div>
+   
 
         <nav className="hidden lg:flex gap-12 text-lg font-medium">
           <NavLink

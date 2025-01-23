@@ -210,8 +210,11 @@
 
 
 import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Live_polling = ({ quizId }) => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [pollData, setPollData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -223,7 +226,7 @@ const Live_polling = ({ quizId }) => {
         const token = localStorage.getItem("access");
         if (!token) throw new Error("No token found");
 
-        const response = await fetch(`http://127.0.0.1:8000/api/67/live_polling/`, {
+        const response = await fetch(`http://127.0.0.1:8000/api/${id}/live_polling/`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

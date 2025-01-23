@@ -108,13 +108,13 @@ const Quizzes = () => {
   }
  
   return (
-    <div className={`${theme === "dark" ? "bg-black text-white" : "bg-white text-black"} `}>
+    <div className={` ${theme === "dark" ? "bg-black text-white" : "bg-white text-black"} `}>
 
-    <div className="flex flex-col md:flex-row h-screen ">
-      <div className={`w-full md:w-[17%] h-full bg-black ${theme === "dark" ? "bg-black text-white" : "bg-white text-black"}`}>
+    <div className="flex flex-col md:flex-row  ">
+      <div className={`w-full md:w-[17%]  h-full ${theme === "dark" ? "bg-black text-white" : "bg-white text-black"}`}>
         <Setting />
       </div>
-      <div className="w-full md:w-[85%] flex flex-col">
+      <div className="w-full md:w-[85%] flex flex-col ">
         <div className="h-[14%] ">
           <Dashboard_heading_buttons
             heading={"Quizzes"}

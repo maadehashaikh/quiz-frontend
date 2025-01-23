@@ -177,6 +177,13 @@ const QuizPreview = () => {
           >
             Quiz History
       </button>
+      <button
+      className="flex bg-blue-600 hover:bg-blue-700 text-white w-[20%] text-center px-4 py-2 m-4 rounded"
+            onClick={() => navigate(`/live_polling/${id}`)}
+          >
+           Live Polling
+      </button>
+
       </div>
       <div className="text-xl shadow-lg p-6 rounded-lg bg-black text-gray-100">
   <h2 className="mb-4 flex items-center">
